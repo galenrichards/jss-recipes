@@ -3,6 +3,7 @@ AdobeFlashPlayer.jss
 AirServer.jss
 Atom.jss
 ComicLife3.jss
+Cyberduck.jss
 EclipseLuna.jss
 Evernote.jss
 Firefox.jss
