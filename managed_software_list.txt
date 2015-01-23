@@ -3,6 +3,7 @@ AdobeFlashPlayer.jss
 AirServer.jss
 Atom.jss
 ComicLife3.jss
+Cyberduck.jss
 EclipseLuna.jss
 Evernote.jss
 Firefox.jss
@@ -18,6 +19,7 @@ Jin.jss
 Keynote.jss
 MSOffice2011Updates.jss
 Numbers.jss
+OmniGrafflePro.jss
 OracleJava7.jss
 Pages.jss
 Silverlight.jss
