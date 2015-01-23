@@ -5,7 +5,7 @@
     <key>Description</key>
     <string>Uses parent pkg recipe to download latest OmniGraffle and import it into the JSS.</string>
     <key>Identifier</key>
-    <string>com.github.autopkg.jss.omnigrafflepro</string>
+    <string>com.github.autopkg.jss.omnigraffle6</string>
     <key>Input</key>
     <dict>
       <key>NAME</key>
@@ -17,7 +17,7 @@
       <key>POLICY_TEMPLATE</key>
       <string>%RECIPE_DIR%/PolicyTemplate.xml</string>
       <key>ICON</key>
-      <string>%RECIPE_DIR%/OmniGrafflePro.png</string>
+      <string>%RECIPE_DIR%/OmniGraffle6.png</string>
       <key>GROUP_NAME</key>
       <string>%NAME%-update-smart</string>
       <key>GROUP_TEMPLATE</key>
@@ -28,7 +28,7 @@
     <key>MinimumVersion</key>
     <string>0.4.0</string>
     <key>ParentRecipe</key>
-    <string>com.github.autopkg.pkg.omnigrafflepro</string>
+    <string>com.github.autopkg.pkg.omnigraffle6</string>
     <key>Process</key>
     <array>
       <dict>
