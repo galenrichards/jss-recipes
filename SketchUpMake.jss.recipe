@@ -27,6 +27,8 @@
             <string>%NAME%-update-smart</string>
             <key>GROUP_TEMPLATE</key>
             <string>%RECIPE_DIR%/SmartGroupTemplate.xml</string>
+            <key>SCRIPT_TEMPLATE</key>
+            <string>%RECIPE_DIR%/SketchUpScriptTemplate.xml</string>
             <key>DESCRIPTION</key>
             <string>The easiest way to draw in 3D.</string>
         </dict>
@@ -51,6 +53,15 @@
                     <string>%ICON%</string>
                     <key>self_service_description</key>
                     <string>%DESCRIPTION%</string>
+                    <key>scripts</key>
+                    <array>
+                        <dict>
+                            <key>name</key>
+                            <string>%RECIPE_DIR%/SketchUpPreinstall.sh</string>
+                            <key>template_path</key>
+                            <string>%SCRIPT_TEMPLATE%</string>
+                        </dict>
+                    </array>
                     <key>groups</key>
                     <array>
                         <dict>

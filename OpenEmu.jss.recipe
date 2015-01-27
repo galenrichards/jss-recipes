@@ -3,38 +3,32 @@
 <plist version="1.0">
     <dict>
         <key>Description</key>
-        <string>Downloads Firefox disk image and builds a package, then uploads to the JSS.
-Values for FIREFOX_BUILD correspond to directories here: http://download-origin.cdn.mozilla.net/pub/mozilla.org/firefox/releases/
-Some useful values are: 'latest', 'latest-10.0esr', 'latest-esr', 'latest-3.6', 'latest-beta'
-LOCALE corresponds to directories at http://download-origin.cdn.mozilla.net/pub/mozilla.org/firefox/releases/$FIREFOX_BUILD/mac/
-Examples include 'en-US', 'de', 'ja-JP-mac', 'sv-SE', and 'zh-TW'
-No idea if all Firefox builds are available in all the same localizations, so you may need to verify that any particular
-combination is offered.</string>
+        <string>Downloads the latest version of OpenEmu and makes a pkg of it. Then, uploads to the JSS.</string>
         <key>Identifier</key>
-        <string>com.github.autopkg.jss.Firefox_EN</string>
+        <string>com.github.sheagcraig.jss.OpenEmu</string>
         <key>Input</key>
         <dict>
             <key>NAME</key>
-            <string>Firefox</string>
+            <string>OpenEmu</string>
             <key>CATEGORY</key>
-            <string>Productivity</string>
+            <string>Games</string>
             <key>POLICY_CATEGORY</key>
             <string>Testing</string>
             <key>POLICY_TEMPLATE</key>
             <string>%RECIPE_DIR%/PolicyTemplate.xml</string>
             <key>ICON</key>
-            <string>%RECIPE_DIR%/Firefox.png</string>
-            <key>GROUP_TEMPLATE</key>
-            <string>%RECIPE_DIR%/SmartGroupTemplate.xml</string>
+            <string>%RECIPE_DIR%/OpenEmu.png</string>
             <key>GROUP_NAME</key>
             <string>%NAME%-update-smart</string>
+            <key>GROUP_TEMPLATE</key>
+            <string>%RECIPE_DIR%/SmartGroupTemplate.xml</string>
             <key>DESCRIPTION</key>
-            <string>Web Browser.</string>
+            <string>Multiple video game system emulator.</string>
         </dict>
         <key>MinimumVersion</key>
-        <string>0.4.0</string>
+        <string>0.2.5</string>
         <key>ParentRecipe</key>
-        <string>com.github.autopkg.pkg.Firefox_EN</string>
+        <string>com.github.sheagcraig.pkg.OpenEmu</string>
         <key>Process</key>
         <array>
             <dict>

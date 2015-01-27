@@ -11,7 +11,7 @@
             <key>NAME</key>
             <string>Silverlight</string>
             <key>CATEGORY</key>
-            <string>Media Plugins and Viewers</string>
+            <string>Digital Media</string>
             <key>POLICY_CATEGORY</key>
             <string>Testing</string>
             <key>POLICY_TEMPLATE</key>
@@ -32,8 +32,8 @@
         <key>Process</key>
         <array>
             <!--The parent recipe results in a bundle-style package, which can be
-			problematic for non-AFP repos; eventually fix to wrap in a flat-pkg
-		-->
+            problematic for non-AFP repos; eventually fix to wrap in a flat-pkg
+        -->
             <dict>
                 <key>Arguments</key>
                 <dict>
