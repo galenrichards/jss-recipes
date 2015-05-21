@@ -1,84 +1,31 @@
-Patchoo!
-========
+JSS Recipes
+===============================
+A collection of recipes for automatically creating self-service policies for the Casper Suite. All required sub-elements are configured and uploaded if needed, including scripts, smart-groups, packages (that's what AutoPkg is for, right?), extension attributes, and Self Service icons.
 
-[https://github.com/patchoo/patchoo](https://github.com/patchoo/patchoo)
+Specifically, this creates policies in the "Testing" category which scope installation of the AutoPkg-created package to smart groups named after the application. These smart groups, in most cases, look for computers which do not have this version of the app, and which are members of the "Testing" group.
 
-**(ex-junki)**
+The "Testing" group is NOT created by these policies. You can populate that group with hand-picked power-users, or make it a smart group that nests several other groups. For most of these recipes, even if a computer is a member of the Testing group, they still need to 1.) Have the application in question installed to begin with, and 2.) It must be out of date AND a recon done post-creation of the smart group reports an out-of-date version number.
 
+The policy created is for self-service only, and may be run as many times as the user desires; however, it includes a "Recon" at the conclusion of the package installation, which, if the install was successful, will drop the computer out of the smart group. This way, when the next update comes out, they will be able to run the policy through Self Service again (as opposed to a "Once Per Computer" frequency).
 
-Patchoo somewhat emulates [munki](https://code.google.com/p/munki/) workflows and user experience for JAMF Software's [Casper Suite](http://www.jamfsoftware.com/products/casper-suite/).  
+A few of the recipes demonstrate methods to deal with tricky typees of Applications: Adobe Flash Player, for example, cannot use the same smart group criteria since it is not installed into the /Applications folder, and thus, "Application Title" and "Application Version" recon data is not available.
 
-**Casper** is the best all round management platform for all things Apple. It's incredibly powerful and the JSS has no competition, but the fact it started its life a few years ago when Mac admins were using image-based deployment workflows has meant there is a gap in functionality when it comes to post-deployment patching. You can deploy patches via different built-in triggers and policies, but there is no built-in GUI for user interaction, there is no cohesive way to deploy Apple and third-party updates, and the user experience is lacking.
+These are the recipes that I use to manage our client computers. Hopefully they prove useful at least as a demonstration of how to set up and use the many options for the JSSImporter. If the way I have the recipes written doesn't fit your software deployment workflow, please feel free to copy and edit, use the override system to change the exposed input variables, or to write your own from scratch, using these as an example.
 
-**Munki** is the absolute best way to deploy and install software on many Macs at once. It does one thing, and it does it amazingly well. It can install software and ensure Macs are patched better than any other system. It provides a great end user GUI, unifies Apple and third-party software installations, and allows installations to be deferred. Patchoo is munki inspired, and *hopefully* brings some of munki's greatness to (the already great) Casper.
+Prerequisites, and Installing
+===============================
 
-A lot of people have built different solutions on JAMF Nation, but I think Patchoo is the best and most complete way to deploy and patch your Macs *in the wild*. It provides a great workflow for admins and an excellent user experience.
+These recipes are intended to be used with my [jss-autopkg-addon](https://github.com/sheagcraig/jss-autopkg-addon/releases). Grab the package installer from the releases section, and you're good to go.
 
-### Why not just use munki? ###
+* NOTE These recipes do not work with Allister Banks' jss-autopkg-addon fork, and his recipes will not work with the release listed above.
 
-That's certainly an option, and many people do use munki and Casper. The tools are designed differently and it's  hard to draw parallels between their workflows. It would be great to leverage munki, but currently it is difficult to integrate what's exposed via the JSS API and munki.
+Some of these recipes are for applications distributed through the Apple App Store. For these recipes to work, you'll need to add [Nick McSpadden's AppStoreApp recipes](https://github.com/autopkg/nmcspadden-recipes.git), which in turn require the [pyasn1](http://pyasn1.sourceforge.net) package to check for updates. Furthermore, you need to have the apps installed on the machine you are running AutoPkg on.
 
-### Patchoo isn't just a script... ###
-  
-...it's a patching and deployment methodology that:
+To add these:
+```
+autopkg repo-add nmcspadden-recipes
 
-* allows munki-style deployment groups (*dev / beta / production / etc*) based on JSS computer group membership.
-* will write your Apple Software Update catalogURL dynamically so these deployment groups can be pointed at [NetSUS](https://jamfnation.jamfsoftware.com/viewProduct.html?id=180&view=info) / [reposado](https://github.com/wdas/reposado) branches.
-* can chain incremental updaters intelligently (*eg. MS Office 2011 14.1.0, then 14.4.5*)
-* leverages existing and familiar Casper frameworks and methods (triggers, policies, smart groups) 
+pip install --user git+https://github.com/geertj/python-asn1.git#egg=pyasn1
+```
 
-From a user experience perspective it:
-
-* provides Casper with a much needed a GUI for software installation.
-* unifies Casper and Apple Software Update installations.
-* allows installations to be deferred, allows flexibiliy but maintaining compliance.
-* ensures users are logged out during installations.
-* integrates nicely with Self Service.
-
-### Demonstration ###
-
-##### User Prompt Screenshot #####
-
-![User Prompt](https://raw.githubusercontent.com/patchoo/patchoo/master/docs/images/prompt.png)
-
-##### Overview Video #####
-	
-[![patchooDemo Video](http://img.youtube.com/vi/aeOOPHH3-NY/0.jpg)](http://www.youtube.com/watch?v=aeOOPHH3-NY)
-
-##### Sample [jamf.log](https://github.com/patchoo/patchoo/blob/master/docs/jamf_patchoo.log.txt) from the video 
-
-
-### DISCLAIMER: USE AT YOUR OWN RISK! ###
-
-*The documentation needs work, the code isn't pretty, and it shouldn't be written in bash, but it (mostly) works! I am not a programmer, I'm just a lowly systems engineer that's kludged a few scripts in his time. I do think I have nailed the workflow and user experience though. It's here on GitHub so you can help make it great!*
-
-
-Requirements
-------------
-* CocoaDialog 3.x
-* JAMF Casper (developed & tested on 9.22 - might work on 8.x)
-* http-enabled distribution points or JDS (policy within policy doesn't play nice with fileshare-based CDPs)
-* OSX (10.6-10.9)
-* *A big bunch of Macs!*
-
-
-Documentation
--------------
-     
-[https://github.com/patchoo/patchoo/blob/master/docs/_index.md](https://github.com/patchoo/patchoo/blob/master/docs/_index.md )
-
-
-Help out!
----------
-
-
-If you want to help in any way please reach out via email or submit some pull requests.
-
-If you find it useful and want to say thank you, link up on [LinkedIn](http://au.linkedin.com/in/lachlanstewart) or hit me up at [@loceee](https://twitter.com/loceee) and tell me how and where you are using it.
-
-  
-###Enjoy Patchoo!###
-
-Lachlan.
-
-
+Obviously, make sure you meet the Licensing requirements for any App Store Apps you intend on distributing. Further, if you don't _own_ a copy of FinalCutPro, for example, you will not be able to run the recipe! (Because you need the app installed on your machine to build the package).
